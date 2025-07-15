@@ -1,3 +1,5 @@
+# DO NOT call app.run() when using gunicorn
+# Keep only this:
 from flask import Flask, request, send_file, render_template
 from rembg import remove
 import io
@@ -25,9 +27,3 @@ def remove_bg():
     except Exception as e:
         print("Error:", e)
         return 'Error processing image', 500
-
-import os
-
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))  # Render will pass a PORT env var
-    app.run(debug=True, host='0.0.0.0', port=port)
