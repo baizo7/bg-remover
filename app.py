@@ -26,5 +26,8 @@ def remove_bg():
         print("Error:", e)
         return 'Error processing image', 500
 
+import os
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Render will pass a PORT env var
+    app.run(debug=True, host='0.0.0.0', port=port)
