@@ -1,6 +1,7 @@
 from flask import Flask, request, send_file, render_template
 from rembg import remove
 import io
+import os
 
 app = Flask(__name__, template_folder="templates")
 
@@ -26,6 +27,7 @@ def remove_bg():
         print("Error:", e)
         return 'Error processing image', 500
 
-# This block is optional for Render, but helpful for local testing
+# ✅ This is required for Render to bind to its assigned port
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
