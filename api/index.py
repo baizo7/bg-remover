@@ -25,6 +25,5 @@ def remove_bg():
     except Exception as e:
         print("Error:", e)
         return 'Error processing image', 500
-
-if __name__ == '__main__':
-    app.run(debug=True)  # 👈 Add this for local testing
+ 
+app = app
