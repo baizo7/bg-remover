@@ -27,7 +27,7 @@ def remove_bg():
         print("Error:", e)
         return 'Error processing image', 500
 
-# ✅ This is required for Render to bind to its assigned port
+# ✅ Required for local testing (ignored by Gunicorn in Render)
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
-    app.run(debug=True, host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port)
