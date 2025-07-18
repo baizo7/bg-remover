@@ -2,7 +2,7 @@ from flask import Flask, request, send_file, render_template
 from rembg import remove
 import io
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates")
 
 @app.route('/')
 def home():
@@ -25,5 +25,7 @@ def remove_bg():
     except Exception as e:
         print("Error:", e)
         return 'Error processing image', 500
- 
-app = app
+
+# This block is optional for Render, but helpful for local testing
+if __name__ == '__main__':
+    app.run(debug=True)
