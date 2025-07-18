@@ -3,12 +3,18 @@ from rembg import remove
 import io
 import os
 
+# Debug print to verify app is loading on Render
+print("==== Flask app is being loaded ====")
+
+# Create Flask app instance
 app = Flask(__name__, template_folder="templates")
 
+# Home route
 @app.route('/')
 def home():
     return render_template('index.html')
 
+# Route to remove background
 @app.route('/remove-bg', methods=['POST'])
 def remove_bg():
     if 'image' not in request.files:
@@ -24,10 +30,10 @@ def remove_bg():
             download_name='output.png'
         )
     except Exception as e:
-        print("Error:", e)
+        print("Error during image processing:", e)
         return 'Error processing image', 500
 
-# ✅ Required for local testing (ignored by Gunicorn in Render)
+# For local development only; ignored by Gunicorn on Render
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     app.run(host='0.0.0.0', port=port)
